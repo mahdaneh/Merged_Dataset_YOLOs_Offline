@@ -1,0 +1,60 @@
+*** all classes' index in the original voc2012
+* all_classes
+* aeroplane:0
+*bicycle:1
+*bird:2
+*boat:3
+*bottle:4
+*bus:5
+*car:6
+*cat:7
+*chair:8
+*cow:9
+*diningtable:10
+*dog:11
+*horse:12
+*motorbike:13
+*person:14
+*pottedplant:15
+*sheep:16
+*sofa:17
+*train:18
+*tvmonitor:19
+
+# excluded_class
+car: 6
+ motorcycle: 13
+ bicycle:1
+ aeroplane:0
+ bus:5
+ person: 14
+
+
+
+
+# included_class
+cat: 7
+cow :9
+ dog: 11
+ horse: 12
+ train: 18
+ sheep: 16
+
+
+
+*** all the index of classes in the merged one
+# merged_class_index
+cat:0
+cow:1
+dog:2
+horse:3
+train:4
+sheep:5
+car:6
+motorcycle:7
+bicycle:8
+aeroplane:9
+bus:10
+person:11
+
+

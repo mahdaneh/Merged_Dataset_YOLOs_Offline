@@ -1,0 +1,7 @@
+This repo aims to implement the idea of having several object detectors, each for a constitute dataset in the merged one! 
+
+
+
+**************** Reference **************************
+
+ Rame, E. Garreau, H. Ben-Younes, and C. Ollion, “Omnia fasterr-cnn: Detection in the wild through dataset merging and soft distil-lation,”arXiv preprint arXiv:1812.02611, 2018.

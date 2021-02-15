@@ -1,0 +1,8 @@
+
+#voc2007
+class_configuration = /root/Self_driving/offline_pseudo_label_YOLO/voc7-voc12-Exp1/data/voc2007.txt
+dataset_path = /root/Self_driving/dataset/Pascal2007/VOC_train/JPEGImages
+
+#voc2012
+class_configuration  = /root/Self_driving/offline_pseudo_label_YOLO/voc7-voc12-Exp1/data/voc2012.txt
+dataset_path = /root/Self_driving/dataset/Pascal2012/VOC_train/JPEGImages
