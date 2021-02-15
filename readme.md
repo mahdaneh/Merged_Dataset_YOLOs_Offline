@@ -1,19 +1,22 @@
 
 This repo is a [forked version](https://github.com/ultralytics/yolov3) and aim to implement the method proposed in [Omnia faster r-cnn](https://arxiv.org/abs/1812.02611).
-This paper introduces a offline method for generating pseudo-label instances in a merged dataset, which contains many missing-label instances. To read briefly about that,
-please read my [blog post](https://mahdaneh.github.io/Blogs/Object_Detector.html).
+This paper introduces an offline method for generating pseudo-label instances in a merged dataset which can contain many missing-label instances. For a brief introduction on merged datasets,
+interested readers are referred to [here](https://mahdaneh.github.io/Blogs/Object_Detector.html).
 
- Here, instead of faster r-CNN, we used YOLO v3. First, two disjoint datasets are created, using VOC family of datasets, as follows (see `utils/custom_datasets.py`, to load the datasets properly):
+  Instead of faster r-CNN, we used YOLO v3 ([implemented](https://github.com/ultralytics/yolov3)). First, two disjoint datasets are created, using VOC family of datasets, as follows:
   - **VOC 2007**; with following focused categories: <img src="https://render.githubusercontent.com/render/math?math=A">
-={*cat, cow, dog, horse, train, sheep*}, the datatset is called VOC7_A.
+={*cat, cow, dog, horse, train, sheep*}, **the datatset is called VOC7_A**.
   - **VOC 2012**; <img src="https://render.githubusercontent.com/render/math?math=B">={*car, motorcycle, bicycle, aeroplane, bus, person*}, the dataset is named VOC12_B.
 
-Then, two YOLOs are trained separately on each of the above datasets in order to be used later for generating pseudo labels for missing label instances from either categories
- <img src="https://render.githubusercontent.com/render/math?math=A">or <img src="https://render.githubusercontent.com/render/math?math=B">.
+Using function `incld_or_excld_dataset` in `utils/custom_datasets.py`, we load VOC7_A (VOC12_B) from VOC2007 (VOC2012). The categories of interest for VOC7_A are indicated in `voc7-voc12-Exp1/data/voc2007.txt`.
+
+
+Then, two YOLOs are trained separately on each of the above datasets to be used later for generating pseudo labels for missing label instances from either categories
+ <img src="https://render.githubusercontent.com/render/math?math=A"> or <img src="https://render.githubusercontent.com/render/math?math=B">.
 
 More precisely, after merging together VOC7_A and VOC12_B, the resultant dataset can contain missing label instances. For example, in the following annotated image from VOC7_A,
  it contains horse annotated, but no annotation for person as "person" category is not in <img src="https://render.githubusercontent.com/render/math?math=A">.
-However, after merging VOC7_A and VOC12_B, the person in this image becomes a missing label instance as "person" is a object of interest in <img src="https://render.githubusercontent.com/render/math?math=A\cup B">.
+However, after merging VOC7_A and VOC12_B, the person in this image becomes a missing label instance as "person" is an object of interest in <img src="https://render.githubusercontent.com/render/math?math=A\cup B">.
 
 |![](images/voc7_A.png)|
 |:--:|
