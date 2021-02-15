@@ -109,7 +109,8 @@ class offline_ObjctDtctr():
 
         nc = len(self.names)
         last = self.weight_dir +'/last.pt'
-        best =  self.weight_dir +'/best.pt'
+        best = self.weight_dir + '/best.pt'
+
         batch_size = self.args.batch_size
 
         self.model.nc = nc  # attach number of classes to model
@@ -122,7 +123,7 @@ class offline_ObjctDtctr():
         f_result = open(self.weight_dir+'/training_results.txt','a')
         f_result.write(('%10s' * 7)% ('Epoch', 'gpu_mem', 'GIoU', 'obj', 'cls', 'total', 'targets'))
         
-        st_epoch, best_fitness = load_pre_weights( self.device,  best, self.model, self.optimizer, self.args)
+        st_epoch, best_fitness = load_pre_weights( self.device, self.model, self.optimizer, self.args)
 
 
         for epoch in range( st_epoch ,self.args.epochs):  # epoch ------------------------------------------------------------------
@@ -204,7 +205,8 @@ class offline_ObjctDtctr():
 
 
     def predict_evaluate(self, data_info_test=None, flg_incld = None, model_weights  = None, nms_thres=None, nms_conf_thres= None, iou_thres=None):
-        f_result = open('/'.join(model_weights.split('/')[:-1])+'_results_%s'%data_info_test['dataset_name'],'a')
+        if model_weights is None: f_result = open(self.weight_dir +'/results_%s'%data_info_test['dataset_name'],'a')
+        else: f_result = open('/'.join(model_weights.split('/')[:-1])+'/results_%s'%data_info_test['dataset_name'],'a')
 
         if data_info_test is None:
             print ('Test performs on training set with the classes on focus %s'%self.dataset.fcs_lbl)
@@ -218,7 +220,9 @@ class offline_ObjctDtctr():
 
         model = self.model
         device = next(model.parameters()).device  # get model device
+        print(model_weights)
         if model_weights is not None:
+
             model.load_state_dict(torch.load(model_weights, map_location=device)['model'])
 
         print ('the used device by model %s'%device)
@@ -399,21 +403,16 @@ class offline_ObjctDtctr():
 
 
 
-def load_pre_weights(  device, last, model, optimizer, opt):
+def load_pre_weights(  device, model, optimizer, opt):
     st_epoch, best_fitness = 0, np.inf
 
     if opt.resume:
-        # possible weights are 'last.pt', 'yolov3-spp.pt', 'yolov3-tiny.pt' etc.
-        chkpt = torch.load(last, map_location=device)
+        best = opt.weight_dir + '/best.pt'
+        chkpt = torch.load(best, map_location=device)
 
-        # load model
-        # if opt.transfer:
-        print ('Load pre-trained models at %s'%last)
+        print ('Load pre-trained models at %s'%best)
         chkpt['model'] = {k: v for k, v in chkpt['model'].items() if model.state_dict()[k].numel() == v.numel()}
         model.load_state_dict(chkpt['model'], strict=False)
-        # else:
-        #    model.load_state_dict(chkpt['model'])
-
 
         if chkpt['optimizer'] is not None:
             optimizer.load_state_dict(chkpt['optimizer'])
@@ -426,7 +425,7 @@ def load_pre_weights(  device, last, model, optimizer, opt):
         del chkpt
 
     if opt.transfer:
-        chkpt = torch.load(last)
+        chkpt = torch.load(opt.pre_weight)
         model.load_state_dict(chkpt['model'])
 
     return st_epoch, best_fitness
