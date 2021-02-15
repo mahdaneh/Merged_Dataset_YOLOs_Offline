@@ -13,10 +13,10 @@ Then, two YOLOs are trained separately on each of the above datasets in order to
 
 More precisely, after merging together VOC7_A and VOC12_B, the resultant dataset can contain missing label instances. For example, in the following annotated image from VOC7_A,
  it contains horse annotated, but no annotation for person as "person" category is not in <img src="https://render.githubusercontent.com/render/math?math=A">.
-
- ![](images/voc7_A.png)
-
 However, after merging VOC7_A and VOC12_B, the person in this image becomes a missing label instance as "person" is a object of interest in <img src="https://render.githubusercontent.com/render/math?math=A\cup B">.
+
+ ![A sample from VOC7_A, which contains the instances from {*cat, cow, dog, horse, train, sheep*} annotated. The "Person" instance becomes
+ a missing-label instance after merging VOC7_A and VOC12_B.](images/voc7_A.png)
 
 Using YOLO trained on VOC12_B,  the authors proposed to generate pseudo label for the possible missing-label instances from <img src="https://render.githubusercontent.com/render/math?math=B">  in VOC7_A.
  Simialrly, using YOLO trained on VOC7_A, the missing label instance that exist in VOC7_B can be generated.
