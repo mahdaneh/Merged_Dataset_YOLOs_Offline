@@ -34,5 +34,5 @@ As main point of start, in order to train a YOLO model, test it,  or generate ps
 - pillow
 
 
-** Reference **
+## Reference
  Rame, E. Garreau, H. Ben-Younes, and C. Ollion, “Omnia faster r-cnn: Detection in the wild through dataset merging and soft distil-lation,”arXiv preprint arXiv:1812.02611, 2018.
