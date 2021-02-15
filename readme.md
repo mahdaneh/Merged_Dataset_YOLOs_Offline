@@ -1,6 +1,6 @@
 
 This repo is a [forked version](https://github.com/ultralytics/yolov3) and aim to implement the method proposed in [Omnia faster r-cnn](https://arxiv.org/abs/1812.02611).
-This method is a baseline for generating pseudo-label instances in a merged dataset, which contains many missing-label instances. To read briefly about that,
+This paper introduce a offline method for generating pseudo-label instances in a merged dataset, which contains many missing-label instances. To read briefly about that,
 please read my [blog post](https://mahdaneh.github.io/Blogs/Object_Detector.html).
 
  Here, instead of faster r-CNN, we used YOLO v3. First, two disjoint datasets are created, using VOC family of datasets, as follows (see `utils/custom_datasets.py`, to load the datasets properly):
@@ -19,8 +19,7 @@ However, after merging VOC7_A and VOC12_B, the person in this image becomes a mi
 |:--:|
 | *Figure 1: A sample from VOC7_A, which contains the annotated instances from {*cat, cow, dog, horse, train, sheep*}. While the "Person" instance is not an object of interest in VOC7_A, it becomes a missing-label instance after merging VOC7_A and VOC12_B.* |
 
-Using YOLO trained on VOC12_B,  the authors proposed to generate pseudo label for the possible missing-label instances from <img src="https://render.githubusercontent.com/render/math?math=B">  in VOC7_A.
- Simialrly, using YOLO trained on VOC7_A, the missing label instance that exist in VOC7_B can be generated.
+|Using YOLO trained on VOC12_B,  the authors proposed to generate pseudo label for the possible missing-label instances from <img src="https://render.githubusercontent.com/render/math?math=B">  in VOC7_A. Simialrly, using YOLO trained on VOC7_A, the missing label instance that exist in VOC7_B can be generated.|
 
 
 As main point of start, in order to train a YOLO model, test it,  or generate pseudo_label for missing label instance, `offline_ODs.py` should be used.
