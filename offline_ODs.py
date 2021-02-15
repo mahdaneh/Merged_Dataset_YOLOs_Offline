@@ -26,9 +26,9 @@ def main ():
     # adding
     parser.add_argument('--milestone', type=int, nargs='+')
 
-
     args = parser.parse_args()
 
+    print (args)
     merged_data_info = os.path.join(args.working_dir, 'data_configuration')
     weight_dir = os.path.join(args.working_dir, 'weights')
     try:
@@ -43,7 +43,7 @@ def main ():
     [print(data) for data in data_setup]
 
 
-    ODs = [ObjectDetector.offline_ObjctDtctr( devices[1], args), []]
+    ODs = [ObjectDetector.offline_ObjctDtctr( devices[1], args), ObjectDetector.offline_ObjctDtctr( devices[1], args)]
 
 
     if args.phase =='train':
