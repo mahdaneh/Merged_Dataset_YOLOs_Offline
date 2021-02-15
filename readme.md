@@ -17,7 +17,7 @@ However, after merging VOC7_A and VOC12_B, the person in this image becomes a mi
 
 |![](images/voc7_A.png)|
 |:--:|
-| *Figure 1: A sample from VOC7_A, which contains the instances from {*cat, cow, dog, horse, train, sheep*} annotated. The "Person" instance becomes a missing-label instance after merging VOC7_A and VOC12_B.* |
+| *Figure 1: A sample from VOC7_A, which contains the annotated instances from {*cat, cow, dog, horse, train, sheep*}. While the "Person" instance is not an object of interest in VOC7_A, it becomes a missing-label instance after merging VOC7_A and VOC12_B.* |
 
 Using YOLO trained on VOC12_B,  the authors proposed to generate pseudo label for the possible missing-label instances from <img src="https://render.githubusercontent.com/render/math?math=B">  in VOC7_A.
  Simialrly, using YOLO trained on VOC7_A, the missing label instance that exist in VOC7_B can be generated.
