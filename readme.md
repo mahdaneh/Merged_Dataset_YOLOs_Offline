@@ -17,7 +17,9 @@ More precisely, after merging together VOC7_A and VOC12_B, the resultant dataset
  ![](images/voc7_A.png)
 
 However, after merging VOC7_A and VOC12_B, the person in this image becomes a missing label instance as "person" is a object of interest in <img src="https://render.githubusercontent.com/render/math?math=A\cup B">.
-Using YOLO trained on VOC12_B, the authors proposed to generate pseudo label for missing-label instances in VOC7_A, and vice versa.
+
+Using YOLO trained on VOC12_B,  the authors proposed to generate pseudo label for the possible missing-label instances from <img src="https://render.githubusercontent.com/render/math?math=B">  in VOC7_A.
+ Simialrly, using YOLO trained on VOC7_A, the missing label instance that exist in VOC7_B can be generated.
 
 
 As main point of start, in order to train a YOLO model, test it,  or generate pseudo_label for missing label instance, `offline_ODs.py` should be used.
