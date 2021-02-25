@@ -31,10 +31,11 @@ As main point of start, in order to train a YOLO model, test it,  or generate ps
 
 ## required packages:
 - matplotlib
-- opencv-contrib-python
+- opencv
 - tqdm
 - torchvision
 - pillow
+- torch
 
 
 ## Reference
